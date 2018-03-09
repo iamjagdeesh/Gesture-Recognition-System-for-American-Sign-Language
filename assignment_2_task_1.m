@@ -1,3 +1,4 @@
+numOfFeatures = 34;
 words = ["About","And","Can","Cat","Cop","Cost","Day","Deaf","Decide","Father","Find","Gold","Goodnight","GoOut","Hearing","Here","Hospital","If"];
 folderName = "DM07";
 outputFolder = 'Task-1-Output';
@@ -11,7 +12,7 @@ for i=1:length(words)
         fileObj = fileNames(j);
         fileName = fileObj.name;
         fileContent = readtable(strcat(folderName,'/',fileName));
-        table = fileContent(1:end,1:34);%Only 34 sensor data as mentioned
+        table = fileContent(1:end,1:numOfFeatures);
         content = table2array(table);
         contentTransposed = content.';
         if j==1
