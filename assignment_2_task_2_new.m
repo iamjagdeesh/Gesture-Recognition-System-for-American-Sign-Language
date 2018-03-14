@@ -1,5 +1,5 @@
 numOfFeatures = 34;
-words = ["About","And","Can","Cat","Cop","Cost","Day","Deaf","Decide","Father","Find","Gold","Goodnight","GoOut","Hearing","Here","Hospital","If"];
+words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
 statisticalFeatures = ["MIN","MAX","AVG","STD","RMS"];
 inputFolder = 'Task-1-Output';
 for statFeatureIndex=1:length(statisticalFeatures)
@@ -37,12 +37,19 @@ for statFeatureIndex=1:length(statisticalFeatures)
                     plotValues = std(concatenatedContent,0,2);
             end
             [m,n] = size(plotValues);
-            xAxis(1:m,1) = i;
-            scatter(xAxis(1:m,1), plotValues);
-            hold on;
+            if i==1
+                concatenatedPlotValues = plotValues(1:20,1);
+            else
+                concatenatedPlotValues = cat(2, concatenatedPlotValues, plotValues(1:20,1));
+            end
+%             xAxis(1:m,1) = words(i);
+%             scatter(xAxis(1:m,1), plotValues);
+%             hold on;
+%             boxplot(plotValues, words(i));
+%             hold on;
         end
+        boxplot(concatenatedPlotValues,words);
         imageName = strcat(outputFolderName,'/','F',num2str(featureIndex),'.jpg');
         saveas(gcf,imageName);
-        hold off;
     end
 end

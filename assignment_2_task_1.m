@@ -1,21 +1,28 @@
 numOfFeatures = 34;
-words = ["About","And","Can","Cat","Cop","Cost","Day","Deaf","Decide","Father","Find","Gold","Goodnight","GoOut","Hearing","Here","Hospital","If"];
-folderName = "DM07";
+wordsForMatch = ["About","And","Can","Cop","Deaf","Decide","Father","Find","Out","Hearing"];
+words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
+folderName = "DM";
 outputFolder = 'Task-1-Output';
 if ~exist(outputFolder, 'dir')
     mkdir(outputFolder);
 end
-for i=1:length(words)
-    fileNameRegex = strcat(folderName,'/',words(i),'*.csv');
+for i=1:length(wordsForMatch)
+    fileNameRegex = strcat(folderName,'/',folderName,'*/','*.csv');
     fileNames = dir(char(fileNameRegex));
+    concatenatedContent = [];
     for j=1:length(fileNames)
         fileObj = fileNames(j);
         fileName = fileObj.name;
-        fileContent = readtable(strcat(folderName,'/',fileName));
+        regEx = strcat('\w*',wordsForMatch(i),'\w*','.csv');
+        startIndex = regexpi(fileName,regEx);
+        if isempty(startIndex)
+            continue
+        end
+        fileContent = readtable(strcat(fileObj.folder,'/',fileName));
         table = fileContent(1:end,1:numOfFeatures);
         content = table2array(table);
         contentTransposed = content.';
-        if j==1
+        if isempty(concatenatedContent)
             concatenatedContent = contentTransposed;
         else
             [x1,y1] = size(concatenatedContent);
