@@ -39,3 +39,14 @@ for i=1:length(selectedFeatures)
         concatenatedContentAfterAlgo = cat(2,concatenatedContentAfterAlgo,contentAfterAlgo);
     end
 end
+
+% Task 3
+actionFeatureMatrix = concatenatedContentAfterAlgo;
+[coeff,score,latent,tsquared,explained] = pca(actionFeatureMatrix);
+biplot(coeff(:,1:2),'scores',score(:,1:2),'varlabels',{'GRX-FFT-1','GRX-FFT-2','GRX-FFT-3','GRX-FFT-4','EMG0R-RMS'});
+
+scatter3(score(:,1),score(:,2),score(:,3));
+axis equal;
+xlabel('1st Principal Component');
+ylabel('2nd Principal Component');
+zlabel('3rd Principal Component');
