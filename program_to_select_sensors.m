@@ -3,7 +3,7 @@ numOfFeatures = 34;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
 maxTimeLength = 55;
 inputFolder = 'Task-1-Output';
-statisticalFeatures = ["FFT","DWT","RMS","STD"];
+statisticalFeatures = ["DWT","FFT","RMS","STD"];
 numberOfSensorsInAlgos = [5, 5, 5, 5];
 for statFeatureIndex=1:length(statisticalFeatures)
     meanedValue = [];
@@ -22,7 +22,10 @@ for statFeatureIndex=1:length(statisticalFeatures)
                     case "FFT"
                         contentAfterAlgo = abs(fft(content(rowNumber,1:end)));
                     case "DWT"
-                        [contentAfterAlgo,cH,cV,cD] = dwt2(content(rowNumber,1:end),'sym4','mode','per');
+                        x = content(rowNumber,1:end);
+                        k = find(isnan(x));
+                        x(k) = 0;
+                        contentAfterAlgo = dwt(x,'sym4');
                     case "RMS"
                         contentAfterAlgo = rms(content(rowNumber,1:end));
                     case "STD"

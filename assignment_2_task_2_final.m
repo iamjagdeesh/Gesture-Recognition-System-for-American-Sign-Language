@@ -34,7 +34,11 @@ for i=1:length(words)
                         contentAfterAlgo = sort(contentAfterAlgo,'descend');
                         contentAfterAlgo = contentAfterAlgo(:,1:3);% 3 interesting points from fft
                     case "DWT"
-                        [contentAfterAlgo,cH,cV,cD] = dwt2(content(rowNumber,1:end),'sym4','mode','per');
+                        contentIndividual = content(rowNumber,1:end);
+                        nanIndex = find(isnan(contentIndividual));
+                        contentIndividual(nanIndex) = 0;
+                        contentAfterAlgo = dwt(contentIndividual,'sym4');
+                        % contentAfterAlgo = dwt(content(rowNumber,1:end),'sym4');
                         contentAfterAlgo = contentAfterAlgo(:,1:3);% 3 interesting points from dwt
                     case "RMS"
                         contentAfterAlgo = rms(content(rowNumber,1:end));
