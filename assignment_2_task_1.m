@@ -1,5 +1,5 @@
 numOfFeatures = 34;
-maxTimeLength = 55;
+maxTimeLength = 45;
 wordsForMatch = ["About","And","Can","Cop","Deaf","Decide","Father","Find","Out","Hearing"];
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
 folderName = "DM";
