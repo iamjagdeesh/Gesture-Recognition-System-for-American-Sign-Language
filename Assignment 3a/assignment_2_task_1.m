@@ -7,7 +7,7 @@ maxTimeLength = 45;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
 folderName = "DM";
 
-% Looping over differnt groups as user independent analysis
+% Looping over different groups as user independent analysis
 userNameRegex = strcat(folderName,'/',folderName,'*');
 userNames = dir(char(userNameRegex));
 for k=1:length(userNames)
