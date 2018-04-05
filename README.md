@@ -3,5 +3,5 @@
 ## CSE 572 Data Mining
 
 ### Assignment 1: Data collection
-### Assignment 2: Feature extraction and Feature Selection
+### Assignment 2: Feature Extraction and Feature Selection
 ### Assignment 3a: User dependent analysis
