@@ -1,10 +1,11 @@
-% Task 1: Program to segement raw data into individual classes
+% Task 1: Program to segment raw data into individual classes
 %
 % 10 csv files, 1 for each gesture will be created under the folder
 % Task-1-Out
 numOfFeatures = 34;
 maxTimeLength = 45;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
+diffRegexForGoOut = ["Go Out","Go_Out","GoOut"];
 folderName = "DM";
 
 % Looping over different groups as user independent analysis
@@ -25,10 +26,23 @@ for k=1:length(userNames)
         for j=1:length(fileNames)
             fileObj = fileNames(j);
             fileName = fileObj.name;
-            regEx = strcat('\w*',words(i),'\w*','.csv');
-            startIndex = regexpi(fileName,regEx);
-            if isempty(startIndex)
-                continue
+            if strcmpi(words(i),'GoOut')
+                for g=1:length(diffRegexForGoOut)
+                    regEx = strcat('\w*',diffRegexForGoOut(g),'\w*','.csv');
+                    startIndex = regexpi(fileName,regEx);
+                    if ~isempty(startIndex)
+                        break
+                    end
+                end
+                if isempty(startIndex)
+                    continue
+                end
+            else
+                regEx = strcat('\w*',words(i),'\w*','.csv');
+                startIndex = regexpi(fileName,regEx);
+                if isempty(startIndex)
+                    continue
+                end
             end
             fileContent = readtable(strcat(fileObj.folder,'/',fileName));
             table = fileContent(1:end,1:numOfFeatures);
