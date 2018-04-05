@@ -4,7 +4,7 @@ inputFolder = 'Task-2-Output';
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
 outputFolderName = 'Task-3-Output';
 
-% Looping over different groups as user independent analysis
+% Looping over different groups as user dependent analysis
 userNameRegex = strcat(inputFolder,'/','DM*');
 userNames = dir(char(userNameRegex));
 for u=1:length(userNames)
