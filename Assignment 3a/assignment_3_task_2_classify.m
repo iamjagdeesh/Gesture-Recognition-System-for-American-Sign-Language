@@ -27,12 +27,25 @@ for u=1:length(userNames)
             switch classifiers(j)
                 case "DT"
                     model = fitctree(trainContent(1:end,1:end-1),trainLabels);
+                    predictedLabels = predict(model,testContent(1:end,1:end-1));
                 case "SVM"
                     model = fitcsvm(trainContent(1:end,1:end-1),trainLabels);
+                    predictedLabels = predict(model,testContent(1:end,1:end-1));
                 case "NN"
-                    model = fitctree(trainContent(1:end,1:end-1),trainLabels);
+                    inputs = trainContent(1:end,1:end-1);
+                    targets = trainLabels;
+%                     targetsSecond = targets == 0;
+%                     targets = cat(2,targets,targetsSecond);
+                    testInputs = testContent(1:end,1:end-1);
+                    testTargets = testLabels;
+%                     testTargetsSecond = testTargets == 0;
+%                     testTargets = cat(2,testTargets,testTargetsSecond);
+                    net = feedforwardnet(15);
+                    trainedNet = train(net, inputs', targets');
+                    predictedValues = trainedNet(testInputs');
+                    predictedLabels = predictedValues >= 0.5;
+                    predictedLabels = predictedLabels';
             end
-            predictedLabels = predict(model,testContent(1:end,1:end-1));
             TP = sum((predictedLabels + testLabels) == 2);
             FP = sum((predictedLabels - testLabels) == 1);
             FN = sum((predictedLabels - testLabels) == -1);
