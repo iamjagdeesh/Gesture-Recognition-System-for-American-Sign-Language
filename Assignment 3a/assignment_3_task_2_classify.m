@@ -48,10 +48,25 @@ for u=1:length(userNames)
                     predictedLabels = predictedLabels';
             end
             TP = sum((predictedLabels + testLabels) == 2);
+            if isnan(TP)
+                TP = 0;
+            end
             FP = sum((predictedLabels - testLabels) == 1);
+            if isnan(FP)
+                FP = 0;
+            end
             FN = sum((predictedLabels - testLabels) == -1);
+            if isnan(FN)
+                FN = 0;
+            end
             precision = TP / (TP + FP);
+            if isnan(precision)
+                precision = 0;
+            end
             recall = TP / (TP + FN);
+            if isnan(recall)
+                recall = 0;
+            end
             F1 = (2 * precision * recall) / (precision + recall);
             accuracy = sum(predictedLabels == testLabels) / numOfTestActions;
 %             fprintf('\t\t\tAccuracy: %f\n',accuracy);
