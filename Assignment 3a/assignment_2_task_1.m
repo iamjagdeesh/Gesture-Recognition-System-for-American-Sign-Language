@@ -1,13 +1,12 @@
 % Task 1: Program to segment raw data into individual classes
 %
-% 10 csv files, 1 for each gesture will be created under the folder
-% Task-1-Out
+% 10 csv files, 1 for each gesture will be created under the folder Task-1-Out and under each
+% group or user
 numOfFeatures = 34;
-maxTimeLength = 45;
+maxTimeLength = 55;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
 diffRegexForGoOut = ["Go Out","Go_Out","GoOut"];
 folderName = "DM";
-
 % Looping over different groups as user independent analysis
 userNameRegex = strcat(folderName,'/',folderName,'*');
 userNames = dir(char(userNameRegex));
@@ -50,11 +49,11 @@ for k=1:length(userNames)
             contentTransposed = content.';
             [x1,y1] = size(contentTransposed);
             if y1>maxTimeLength
-                % Neglecting the action which was recorded for more than 45
+                % Neglecting the action which was recorded for more than 55
                 % seconds
                 continue
             elseif y1<maxTimeLength
-                % Padding zeros for actions which have data for less than 45
+                % Padding zeros for actions which have data for less than 55
                 % seconds
                 padding = zeros(x1,maxTimeLength-y1);
                 contentTransposed = cat(2,contentTransposed,padding);

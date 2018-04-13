@@ -1,5 +1,5 @@
-% Assignment 3 : Classification
-
+% Assignment 3 : Dividing the data(O/P of assignment_1_task 3) into test and training for binary classification
+words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
 inputFolder = 'Task-3-Output';
 outputFolderName = 'Classification-DataSet';
 % Looping over different groups as user dependent analysis

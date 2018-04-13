@@ -15,15 +15,16 @@ for i=1:length(words)
     [numOfActions,numberOfExtractedFeatures] = size(content);
     % Running PCA
     [coeff,score,latent,tsquared,explained] = pca(content);
+    pcaFeatureMatrix = content * coeff;
     printStatement = strcat('Percentage of variance covered by the top-', char(numberOfPCAComponents) ,'-principal components:-', ' for ',words(i));
     disp(char(printStatement));
     disp(explained(1:numberOfPCAComponents,1:end));
     % Writing the data in terms of PCA components to csv
-    csvwrite(strcat(outputFolderName,'/',words(i),'-','pca','.csv'),score);
-    [rows,col] = size(score);
+    csvwrite(strcat(outputFolderName,'/',words(i),'-','pca','.csv'),pcaFeatureMatrix);
+    [rows,col] = size(pcaFeatureMatrix);
     % Plotting data in terms of PCA components
     for n=1:rows
-        plot(score(n,1:numberOfPCAComponents));
+        plot(pcaFeatureMatrix(n,1:numberOfPCAComponents));
         hold on;
     end
     title(strcat(' Values vs PCA Components plot for ',' ',words(i),' gesture'));

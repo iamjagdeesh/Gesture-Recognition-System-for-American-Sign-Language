@@ -1,15 +1,15 @@
 % Task 2: Program to extract features and obtain feature matrix for each
 % gesture
 statisticalFeatures = ["FFT","DWT","RMS","STD","AVG"];
-sensorsForStats = ["EMG3R","EMG5R","EMG6R","EMG4R","EMG2R";
-    "EMG4R","EMG7R","EMG3R","EMG0R","GLZ";
-    "EMG2L","EMG6L","EMG0L","EMG7L","EMG3L";
-    "OPL","EMG2L","EMG6L","ALX","OYL";
-    "ARX","GRY","GRX","GRZ","GLY"];
+sensorsForStats = ["EMG7R","EMG0R","EMG1R","EMG5R","EMG6R";
+    "GLY","GLZ","GLX","ALY","GRX";
+    "EMG6L","EMG4L","EMG7L","EMG0L","EMG5L";
+    "EMG4L","EMG6L","EMG5L","EMG0L","EMG7L";
+    "GRZ","GRY","GRX","ALY","GLZ"];
 sensorNames = ["ALX","ALY","ALZ","ARX","ARY","ARZ","EMG0L","EMG1L","EMG2L","EMG3L","EMG4L","EMG5L","EMG6L","EMG7L","EMG0R","EMG1R","EMG2R","EMG3R","EMG4R","EMG5R","EMG6R","EMG7R","GLX","GLY","GLZ","GRX","GRY","GRZ","ORL","OPL","OYL","ORR","OPR","OYR"];
 numOfFeatures = 34;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
-maxTimeLength = 45;
+maxTimeLength = 55;
 inputFolder = 'Task-1-Output';
 outputFolderName = strcat('Task-2-Output');
 numberOfPeakValues = 4;

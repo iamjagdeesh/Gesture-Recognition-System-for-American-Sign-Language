@@ -3,8 +3,9 @@
 % 10 csv files, 1 for each gesture will be created under the folder
 % Task-1-Out
 numOfFeatures = 34;
-maxTimeLength = 45;
+maxTimeLength = 55;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
+diffRegexForGoOut = ["Go Out","Go_Out","GoOut"];
 folderName = "DM";
 outputFolder = 'Task-1-Output';
 if ~exist(outputFolder, 'dir')
@@ -19,10 +20,23 @@ for i=1:length(words)
     for j=1:length(fileNames)
         fileObj = fileNames(j);
         fileName = fileObj.name;
-        regEx = strcat('\w*',words(i),'\w*','.csv');
-        startIndex = regexpi(fileName,regEx);
-        if isempty(startIndex)
-            continue
+        if strcmpi(words(i),'GoOut')
+            for g=1:length(diffRegexForGoOut)
+                regEx = strcat('\w*',diffRegexForGoOut(g),'\w*','.csv');
+                startIndex = regexpi(fileName,regEx);
+                if ~isempty(startIndex)
+                    break
+                end
+            end
+            if isempty(startIndex)
+                continue
+            end
+        else
+            regEx = strcat('\w*',words(i),'\w*','.csv');
+            startIndex = regexpi(fileName,regEx);
+            if isempty(startIndex)
+                continue
+            end
         end
         fileContent = readtable(strcat(fileObj.folder,'/',fileName));
         table = fileContent(1:end,1:numOfFeatures);

@@ -4,7 +4,7 @@
 sensorNames = ["ALX","ALY","ALZ","ARX","ARY","ARZ","EMG0L","EMG1L","EMG2L","EMG3L","EMG4L","EMG5L","EMG6L","EMG7L","EMG0R","EMG1R","EMG2R","EMG3R","EMG4R","EMG5R","EMG6R","EMG7R","GLX","GLY","GLZ","GRX","GRY","GRZ","ORL","OPL","OYL","ORR","OPR","OYR"];
 numOfFeatures = 34;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
-maxTimeLength = 45;
+maxTimeLength = 55;
 inputFolder = 'Task-1-Output';
 statisticalFeatures = ["FFT","DWT","RMS","STD","AVG"];
 numberOfSensorsInAlgos = [5, 5, 5, 5, 5];
