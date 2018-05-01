@@ -1,16 +1,10 @@
-% Assignment 3: Classification
+% Assignment 4: Classification
 numOfFeatures = 34;
 maxTimeLength = 55;
 words = ["About","And","Can","Cop","Deaf","Decide","Father","Find","GoOut","Hearing"];
-folderUserNames = 'Task-3-Output';
 inputFolder = 'Classification-DataSet';
 classifiers = ["DT","SVM","NN"];
-% % Looping over different groups as user dependent analysis
-% userNameRegex = strcat(folderUserNames,'/','DM*');
-% userNames = dir(char(userNameRegex));
 results = [];
-% for u=1:length(userNames)
-%     userName = userNames(u).name;
 trainFileName = strcat(inputFolder,'/','training_data.csv');
 trainFile = readtable(trainFileName,'ReadVariableNames',false);
 trainContent = trainFile(randperm(size(trainFile,1)),:);
@@ -27,15 +21,15 @@ for i=1:length(words)
     for j=1:length(classifiers)
         switch classifiers(j)
             case "DT"
-                %                   Decision Tree training and testing
+%                   Decision Tree training and testing
                 model = fitctree(trainContent(1:end,1:end-1),trainLabels);
                 predictedLabels = predict(model,testContent(1:end,1:end-1));
             case "SVM"
-                %                   SVM training and testing
+%                   SVM training and testing
                 model = fitcsvm(trainContent(1:end,1:end-1),trainLabels,'Standardize',true,'KernelFunction','RBF', 'KernelScale','auto');
                 predictedLabels = predict(model,testContent(1:end,1:end-1));
             case "NN"
-                %                   Neural Network training and testing
+%                   Neural Network training and testing
                 inputs = trainContent(1:end,1:end-1);
                 targets = trainLabels;
                 testInputs = testContent(1:end,1:end-1);
@@ -46,7 +40,7 @@ for i=1:length(words)
                 predictedLabels = predictedValues >= 0.5;
                 predictedLabels = predictedLabels';
         end
-        %           Calculation of accuracy metrics after testing
+%           Calculation of accuracy metrics after testing
         TP = sum((predictedLabels + testLabels) == 2);
         FP = sum((predictedLabels - testLabels) == 1);
         FN = sum((predictedLabels - testLabels) == -1);
@@ -63,6 +57,7 @@ for i=1:length(words)
             F1 = 0;
         end
         accuracy = sum(predictedLabels == testLabels) / numOfTestActions;
+        user = 'DM07';
         result = [words(i), classifiers(j), num2str(accuracy), num2str(precision), num2str(recall), num2str(F1)];
         if isempty(results)
             results = result;
@@ -71,6 +66,5 @@ for i=1:length(words)
         end
     end
 end
-% end
-T = table(results(:,1),results(:,2),results(:,3),results(:,4),results(:,5),results(:,6),'VariableNames',{'Gesture' 'Machine' 'Accuracy' 'Precision' 'Recall' 'F1'});
-writetable(T,'Results-Report-user-independent.csv');
+T = table(results(1:end,1:1),results(1:end,2:2),results(1:end,3:3),results(1:end,4:4),results(1:end,5:5),results(1:end,6:6),'VariableNames',{'Gesture' 'Machine' 'Accuracy' 'Precision' 'Recall' 'F1'});
+writetable(T,'Results-Report-User-Independent.csv');
